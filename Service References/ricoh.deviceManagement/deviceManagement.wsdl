@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:itt="http://www.ricoh.co.jp/xmlns/schema/rdh/commontypes" xmlns:dm="http://www.ricoh.co.jp/xmlns/schema/rdh/devicemanagement" name="deviceManagement" targetNamespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.ricoh.co.jp/xmlns/schema/rdh/devicemanagement">
+      <xsd:import schemaLocation="ricoh-common.xsd" namespace="http://www.ricoh.co.jp/xmlns/schema/rdh/commontypes" />
+      <xsd:complexType name="field">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+          <xsd:element name="type" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="fieldList">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="dm:field[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="fieldListArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="dm:fieldList[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="fieldCapability">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+          <xsd:element name="type" type="xsd:string" />
+          <xsd:element name="description" type="xsd:string" />
+          <xsd:element name="rangeType" type="xsd:string" />
+          <xsd:element name="min" type="xsd:string" />
+          <xsd:element name="max" type="xsd:string" />
+          <xsd:element name="valueStep" type="xsd:string" />
+          <xsd:element name="valueEnum" type="itt:stringArray" />
+          <xsd:element name="unique" type="xsd:boolean" />
+          <xsd:element name="multiple" type="xsd:boolean" />
+          <xsd:element name="required" type="xsd:boolean" />
+          <xsd:element name="readable" type="xsd:boolean" />
+          <xsd:element name="writable" type="xsd:boolean" />
+          <xsd:element name="hidden" type="xsd:boolean" />
+          <xsd:element name="otherCapability" type="itt:propertyList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="fieldCapabilityList">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="dm:fieldCapability[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="objectCapability">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="class" type="xsd:string" />
+          <xsd:element name="description" type="xsd:string" />
+          <xsd:element name="fieldList" type="dm:fieldCapabilityList" />
+          <xsd:element name="operationList" type="dm:operationCapabilityList" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="objectCapabilityList">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="dm:objectCapability[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="operationCapability">
+        <xsd:sequence />
+      </xsd:complexType>
+      <xsd:complexType name="operationCapabilityList">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="dm:operationCapability[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="object">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="class" type="xsd:string" />
+          <xsd:element name="oid" type="xsd:unsignedInt" />
+          <xsd:element name="fieldList" type="dm:fieldList" />
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="emptyRequest" />
+  <wsdl:message name="getProtocolVersionResponse">
+    <wsdl:part name="returnValue" type="xsd:unsignedInt" />
+  </wsdl:message>
+  <wsdl:message name="getServiceCapabilityRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getServiceCapabilityResponse">
+    <wsdl:part name="returnValue" type="itt:propertyList" />
+    <wsdl:part name="supportedClasses" type="itt:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="startSessionRequest">
+    <wsdl:part name="stringIn" type="xsd:string" />
+    <wsdl:part name="timeLimit" type="xsd:unsignedShort" />
+  </wsdl:message>
+  <wsdl:message name="startSessionResponse">
+    <wsdl:part name="returnValue" type="xsd:string" />
+    <wsdl:part name="stringOut" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getDevicePropertyRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+    <wsdl:part name="option" type="xsd:string" />
+    <wsdl:part name="selectProps" type="itt:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="getDevicePropertyResponse">
+    <wsdl:part name="returnValue" type="itt:propertyList" />
+  </wsdl:message>
+  <wsdl:message name="terminateSessionRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="terminateSessionResponse">
+    <wsdl:part name="returnValue" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getObjectsRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+    <wsdl:part name="deviceId" type="xsd:unsignedInt" />
+    <wsdl:part name="objectClass" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getObjectsResponse">
+    <wsdl:part name="returnValue" type="itt:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="getObjectRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+    <wsdl:part name="deviceId" type="xsd:unsignedInt" />
+    <wsdl:part name="objectId" type="xsd:unsignedInt" />
+    <wsdl:part name="fieldList" type="itt:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="getObjectResponse">
+    <wsdl:part name="returnValue" type="dm:object" />
+  </wsdl:message>
+  <wsdl:message name="getObjectCapabilityRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+    <wsdl:part name="deviceId" type="xsd:unsignedInt" />
+    <wsdl:part name="objectId" type="xsd:unsignedInt" />
+    <wsdl:part name="option" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getObjectCapabilityResponse">
+    <wsdl:part name="returnValue" type="dm:objectCapability" />
+  </wsdl:message>
+  <wsdl:message name="lockDeviceRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+    <wsdl:part name="deviceId" type="xsd:unsignedInt" />
+    <wsdl:part name="validDurationHint" type="xsd:unsignedInt" />
+  </wsdl:message>
+  <wsdl:message name="lockDeviceResponse">
+    <wsdl:part name="returnValue" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="unlockDeviceRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+    <wsdl:part name="deviceId" type="xsd:unsignedInt" />
+  </wsdl:message>
+  <wsdl:message name="unlockDeviceResponse">
+    <wsdl:part name="returnValue" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="updateObjectRequest">
+    <wsdl:part name="sessionId" type="xsd:string" />
+    <wsdl:part name="deviceId" type="xsd:unsignedInt" />
+    <wsdl:part name="object" type="dm:object" />
+    <wsdl:part name="options" type="itt:propertyList" />
+  </wsdl:message>
+  <wsdl:message name="updateObjectResponse">
+    <wsdl:part name="returnValue" type="xsd:string" />
+    <wsdl:part name="objectId" type="xsd:unsignedInt" />
+    <wsdl:part name="postProcess" type="itt:stringArray" />
+    <wsdl:part name="truncatedParameter" type="itt:propertyList" />
+    <wsdl:part name="failedPropertyIndex" type="xsd:int" />
+    <wsdl:part name="failedCode" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="deviceManagementPortType">
+    <wsdl:operation name="getProtocolVersion">
+      <wsdl:documentation>Get the version of the protocol in use</wsdl:documentation>
+      <wsdl:input message="tns:emptyRequest" />
+      <wsdl:output message="tns:getProtocolVersionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getServiceCapability">
+      <wsdl:documentation>Get the capabilities of the service</wsdl:documentation>
+      <wsdl:input message="tns:getServiceCapabilityRequest" />
+      <wsdl:output message="tns:getServiceCapabilityResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getDeviceProperty">
+      <wsdl:documentation>Get properties about the device</wsdl:documentation>
+      <wsdl:input message="tns:getDevicePropertyRequest" />
+      <wsdl:output message="tns:getDevicePropertyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="startSession">
+      <wsdl:documentation>Log in and create a session</wsdl:documentation>
+      <wsdl:input message="tns:startSessionRequest" />
+      <wsdl:output message="tns:startSessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="terminateSession">
+      <wsdl:documentation>Log out from an active session</wsdl:documentation>
+      <wsdl:input message="tns:terminateSessionRequest" />
+      <wsdl:output message="tns:terminateSessionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjects">
+      <wsdl:documentation>Get's the objects for the specified device id</wsdl:documentation>
+      <wsdl:input message="tns:getObjectsRequest" />
+      <wsdl:output message="tns:getObjectsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObject">
+      <wsdl:documentation>Get's the requested object for the specified device id</wsdl:documentation>
+      <wsdl:input message="tns:getObjectRequest" />
+      <wsdl:output message="tns:getObjectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getObjectCapability">
+      <wsdl:documentation>Get's the capabilities of the requested object</wsdl:documentation>
+      <wsdl:input message="tns:getObjectCapabilityRequest" />
+      <wsdl:output message="tns:getObjectCapabilityResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="lockDevice">
+      <wsdl:documentation>Locks the device and disable the control panel.</wsdl:documentation>
+      <wsdl:input message="tns:lockDeviceRequest" />
+      <wsdl:output message="tns:lockDeviceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="unlockDevice">
+      <wsdl:documentation>Unlocks the device and enables the control panel.</wsdl:documentation>
+      <wsdl:input message="tns:unlockDeviceRequest" />
+      <wsdl:output message="tns:unlockDeviceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateObject">
+      <wsdl:documentation>Updates the specified object with the new attributes / values.</wsdl:documentation>
+      <wsdl:input message="tns:updateObjectRequest" />
+      <wsdl:output message="tns:updateObjectResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="deviceManagement" type="tns:deviceManagementPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getProtocolVersion">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#getProtocolVersion" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceCapability">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#getServiceCapability" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDeviceProperty">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#getDeviceProperty" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="startSession">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#startSession" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="terminateSession">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#terminateSession" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjects">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#getObjects" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObject">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#getObject" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getObjectCapability">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#getObjectCapability" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lockDevice">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#lockDevice" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="unlockDevice">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#unlockDevice" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateObject">
+      <soap:operation soapAction="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement#updateObject" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://www.ricoh.co.jp/xmlns/soap/rdh/devicemanagement" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="deviceManagement">
+    <wsdl:documentation>Ricoh Devioe Management Service</wsdl:documentation>
+    <wsdl:port name="deviceManagement" binding="tns:deviceManagement">
+      <soap:address location="http://127.0.0.1/DH/devicemanagement" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

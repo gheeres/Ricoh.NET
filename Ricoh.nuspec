@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Ricoh.NET</id>
+    <version>0.1.0.0</version>
+    <title>Ricoh / Lanier Device Services Wrapper</title>
+    <authors>George Heeres</authors>
+    <licenseUrl>https://github.com/gheeres/Ricoh.NET/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/gheeres/Ricoh.NET</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Provides a .NET wrapper for the proprietary Ricoh / Lanier device services. Currently supports the uDirectory and deviceManagement service endpoints.</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>ricoh lanier udirectory devicemanagement device copier printer</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\Ricoh.dll" target="lib\net45" />
+  </files>
+</package>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:itt="http://www.ricoh.co.jp/xmlns/schema/rdh/commontypes" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.ricoh.co.jp/xmlns/schema/rdh/commontypes" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="property">
+    <xsd:sequence>
+      <xsd:element name="propName" type="xsd:string" />
+      <xsd:element name="propVal" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="propertyList">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="itt:property[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="objectRelation">
+    <xsd:sequence>
+      <xsd:element name="objectRelationClass" type="xsd:string" />
+      <xsd:element name="parentObjectId" type="xsd:string" />
+      <xsd:element name="childObjectId" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="objectRelationList">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="itt:objectRelation[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="propertyListArray">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="itt:propertyList[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="integerArray">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="xsd:int[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="unsignedIntArray">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="xsd:unsignedInt[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="stringArray">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="queryTerm">
+    <xsd:sequence>
+      <xsd:element name="operator" type="xsd:string" />
+      <xsd:element name="propName" type="xsd:string" />
+      <xsd:element name="propVal" type="xsd:string" />
+      <xsd:element name="propVal2" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="queryTermArray">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="itt:queryTerm[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="queryOrderBy">
+    <xsd:sequence>
+      <xsd:element name="propName" type="xsd:string" />
+      <xsd:element name="isDecending" type="xsd:boolean" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="queryOrderByArray">
+    <xsd:complexContent mixed="false">
+      <xsd:restriction base="soap-enc:Array">
+        <xsd:attribute wsdl:arrayType="itt:queryOrderBy[]" ref="soap-enc:arrayType" />
+      </xsd:restriction>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28577059-9636-41E7-849F-D788CF22E4CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ricoh</RootNamespace>
+    <AssemblyName>Ricoh</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\RicohDeviceCapabilityMetaDataAttribute.cs" />
+    <Compile Include="DeviceAccessControl.cs" />
+    <Compile Include="Exceptions\DuplicateAddressBookEntryException.cs" />
+    <Compile Include="Exceptions\RicohOperationTimedOutException.cs" />
+    <Compile Include="Exceptions\RicohOperationFailedException.cs" />
+    <Compile Include="Extensions\BooleanExtensions.cs" />
+    <Compile Include="Extensions\DeviceAccessControlExtensions.cs" />
+    <Compile Include="Extensions\DeviceFieldEnumerationExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\NumericExtensions.cs" />
+    <Compile Include="Extensions\ObjectCapabilityExtensions.cs" />
+    <Compile Include="Extensions\FieldCapabilityEnumerationExtensions.cs" />
+    <Compile Include="Extensions\FieldCapabilityExtensions.cs" />
+    <Compile Include="Extensions\FieldArrayExtensions.cs" />
+    <Compile Include="Models\BlackWhiteColorCounter.cs" />
+    <Compile Include="Models\DeviceField.cs" />
+    <Compile Include="Models\DeviceFieldFactory.cs" />
+    <Compile Include="Models\DeviceObject.cs" />
+    <Compile Include="Models\IDeviceField.cs" />
+    <Compile Include="DefaultableDictionary.cs" />
+    <Compile Include="DeviceManagement.cs" />
+    <Compile Include="Exceptions\InvalidRicohAddressBookEntryException.cs" />
+    <Compile Include="Extensions\PropertyExtension.cs" />
+    <Compile Include="Extensions\PropertyArrayExtension.cs" />
+    <Compile Include="IDeviceManagement.cs" />
+    <Compile Include="Models\AddressBookEntry.cs" />
+    <Compile Include="Extensions\FieldExtensions.cs" />
+    <Compile Include="Extensions\DefaultableDictionaryExtension.cs" />
+    <Compile Include="Models\RicohEntryType.cs" />
+    <Compile Include="Models\UserAccessControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\UserCounter.cs" />
+    <Compile Include="Attributes\RicohDeviceAccessControlMetaDataAttribute.cs" />
+    <Compile Include="RicohResponseStatus.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="IUDirectory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RicohEmbeddedEndpointBehavior.cs" />
+    <Compile Include="RicohEmbeddedMessageInspector.cs" />
+    <Compile Include="RicohEmbeddedSoapService.cs" />
+    <Compile Include="RicohSessionType.cs" />
+    <Compile Include="Service References\ricoh.deviceManagement\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ricoh.uDirectory\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="UDirectory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ricoh-devicemanagement.wsdl" />
+    <None Include="ricoh-common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ricoh-udirectory.wsdl" />
+    <None Include="Service References\ricoh.deviceManagement\deviceManagement.wsdl" />
+    <None Include="Service References\ricoh.deviceManagement\ricoh-common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ricoh.deviceManagement\Ricoh.ricoh.deviceManagement.getServiceCapabilityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.deviceManagement\Ricoh.ricoh.deviceManagement.object.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.deviceManagement\Ricoh.ricoh.deviceManagement.objectCapability.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.deviceManagement\Ricoh.ricoh.deviceManagement.property.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.deviceManagement\Ricoh.ricoh.deviceManagement.startSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.deviceManagement\Ricoh.ricoh.deviceManagement.updateObjectResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.uDirectory\ricoh-common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ricoh.uDirectory\Ricoh.ricoh.uDirectory.getServiceCapabilityResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.uDirectory\Ricoh.ricoh.uDirectory.getServiceStateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.uDirectory\Ricoh.ricoh.uDirectory.property.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.uDirectory\Ricoh.ricoh.uDirectory.searchObjectsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.uDirectory\Ricoh.ricoh.uDirectory.startSessionResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ricoh.uDirectory\uDirectory.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ricoh.deviceManagement\" />
+    <WCFMetadataStorage Include="Service References\ricoh.uDirectory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ricoh.deviceManagement\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ricoh.deviceManagement\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ricoh.deviceManagement\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ricoh.uDirectory\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ricoh.uDirectory\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ricoh.uDirectory\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
