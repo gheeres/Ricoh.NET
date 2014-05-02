@@ -456,7 +456,7 @@ namespace Ricoh
       var tags = GetTags();
       if (tags.Count <= 0) return(null);
 
-      return (tags.SingleOrDefault(t => t.Value.ToCharArray().Contains(name[0])).Key);
+      return (tags.SingleOrDefault(t => t.Value.ToCharArray().Contains(Char.ToUpper(name[0]))).Key);
     }
 
     /// <summary>
