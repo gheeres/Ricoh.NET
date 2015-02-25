@@ -38,6 +38,39 @@ MessageInspector were created to modify the incoming and outgoing SOAP messages.
   </xsd:complexType>
 ```
 
+Sample Code
+-----------
+The following code is an example for retrieving and clearing totals from a copier.
+
+```csharp
+  var hostname = "copier.yourdomain.com";
+  var username = "admin";
+  var password = "yourpassword";
+  var clearTotals = false;
+  
+  try {
+    using (DeviceManagement deviceManager = new DeviceManagement(hostname, username, password)) {
+      deviceManager.TimeLimit = 300; // Increase the default timelimit to keep session from expiring.
+
+      // Retrieve our totals
+      IEnumerable<UserCounter> counters = deviceManager.GetUserCounters();
+      
+      // Output totals
+      foreach(var counter in counters) {
+        Console.WriteLine(counter.ToString());
+      }
+      
+      // Clear the totals
+      if (clearTotals) {
+        if (counters != null) deviceManager.Clear(counters);
+        else deviceManager.Clear();
+      }
+    }
+  } catch (Exception) {
+    Console.WriteLine("An error occurred when exporting copier totals for {0}.", hostname);
+  }
+```
+
 Licensed under the MIT license.
 
 ---------------------------------------
